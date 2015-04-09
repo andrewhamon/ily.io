@@ -1,0 +1,21 @@
+{
+  "name": "ily.io",
+  "version": "0.0.0",
+  "description": "Spread the love",
+  "main": "index.html",
+  "keywords": [
+    "ily"
+  ],
+  "authors": [
+    "Andrew Hamon"
+  ],
+  "license": "MIT",
+  "homepage": "https://ily.io",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
