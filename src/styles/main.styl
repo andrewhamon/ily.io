@@ -1,0 +1,181 @@
+@import 'nib/reset'
+global-reset()
+reset-html5()
+
+@import 'animations'
+
+html
+  height: 100%
+
+body
+  font: 16px Roboto, Sans-Serif
+  font-weight: 300
+  text-align: center
+  color: white
+  height: 100%
+  &.white
+    background-color: white
+  &.red
+    background-color: red
+
+h1
+  font-size: 3em
+  margin-bottom: 20px
+  
+a
+  color: inherit
+  &#new
+    display: inline-block
+    color: rgba(0, 0, 0, 0.6)
+    text-decoration: none
+    border: 1px solid
+    padding: 0.375em 0.5em
+    border-radius: 3px
+    margin-top: 1em
+
+    animation: fade-in 1s 9.5s
+    animation-fill-mode: forwards
+    transition: all 0.25s ease
+    
+    &:hover
+      color: rgba(0, 0, 0, 1.0)
+      animation: fade-in 1s 6.5s, fade-to-black 2s 8.5s
+      animation-fill-mode: forwards
+
+address
+  align-items: flex-end
+  margin-top: 1em
+  margin-bottom: 5px
+  font-size: 0.7em
+  color: #FF9999
+  
+  &.animated
+    animation: fade-to-black 1s 8s
+    animation-fill-mode: forwards
+
+button
+  &.new
+    margin-top: 25px
+    padding: 0.375em 0.5em
+
+    font-family: Roboto, sans-serif
+    font-size: 1em
+    font-style: normal
+    font-variant: normal
+    font-weight: 300
+
+    background: none
+
+    cursor: pointer
+
+    border: 1px solid
+    border-radius: 3px
+
+    color: rgba(255, 255, 255, 0.6)
+    transition: all 0.3s ease
+    
+    &:hover
+      color: rgba(255, 255, 255, 1.0)
+
+::input-placeholder
+  color: rgba(255,255,255,0.7)
+
+.hidden
+  opacity: 0
+
+.flex-container
+  display: flex
+  flex-direction: column
+  min-height: 100%
+  overflow: hidden
+
+.centered
+  margin: auto
+
+#recipient-header
+  display: block
+  position: relative
+  z-index: 1
+  font-size: 3em
+  animation: fade-in 2s 0.5s, fade-to-black 2s 8.5s
+  animation-fill-mode: forwards
+
+#message-intro
+  display: block
+  position: relative
+  z-index: 1
+  font-size: 1em
+  animation: fade-in 2s 2.5s, fade-to-black 2s 8.5s
+  animation-fill-mode: forwards
+
+#heart-container
+  position: relative
+
+#heart
+  display: block
+  position: relative
+  z-index: -1
+
+  margin-left: auto
+  margin-right: auto
+  margin-top: 0.625em
+
+  width: 85%
+  max-width: 320px
+
+  transform: scale(20)
+  animation: zoom-out-heart 2s ease-out 7.5s
+  animation-fill-mode: forwards
+
+#ily
+  position: absolute
+  top: 27%
+  bottom: 0
+  left: 0
+  right: 0
+  display: block
+  font-size: 4em
+  height: 0em
+  animation: fade-in 1s 5.5s
+  animation-fill-mode: forwards
+
+#sender-footer
+  display: block
+  position: relative
+  z-index: 1
+  font-size: 1.5em
+  animation: fade-in 1s 6.5s, fade-to-black 2s 8.5s
+  animation-fill-mode: forwards
+  margin-top: 0.5em
+
+#new-header
+  margin-bottom: 40px
+
+#link-form, #link-output
+  font-size: 2em
+
+#link-form input
+  font-family: inherit
+  font-size: 1em
+  font-weight: 100
+  text-align: center
+  width: 85%
+  max-width: 500px
+  border: none
+  outline: 0
+  border-bottom: 1px solid rgba(255, 255, 255, 0.8)
+  border-radius: 0px
+  background: none
+  color: white
+  margin-bottom: 20px
+
+#link-output input
+  font-family: inherit
+  font-size: 0.7em
+  font-weight: 100
+  text-align: center
+  width: 85%
+  border: none
+  outline: 0
+  background: none
+  color: white
