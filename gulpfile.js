@@ -5,6 +5,9 @@ var source       = require('vinyl-source-stream');
 var buffer       = require('vinyl-buffer');
 var filter       = require('gulp-filter');
 var del          = require('del');
+var ghPages      = require('gulp-gh-pages');
+var rev          = require('gulp-rev');
+// TODO - Add revisioning so I can bust some caches
 
 var stylus       = require('gulp-stylus');
 var autoprefixer = require('gulp-autoprefixer');
@@ -25,7 +28,7 @@ gulp.task('styles', function(){
       .pipe(autoprefixer({
             browsers: ['last 2 versions'],
             cascade: false
-        }))
+      }))
       .pipe(minifycss())
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('./dist/styles'))
@@ -65,6 +68,23 @@ gulp.task('clean', function(cb) {
 });
 
 gulp.task('build', ['html', 'styles', 'scripts', 'media']);
+
+gulp.task('deploy-staging', ['build'], function() {
+  return gulp.src('./dist/**/*')
+    .pipe(ghPages());
+});
+
+gulp.task('deploy', ['build'], function() {
+  return gulp.src('./dist/**/*')
+    .pipe(ghPages({
+      remoteUrl: "git@asdev.net:~/ily.io.git"
+    }));
+});
+
+// gulp.task('revision', ['build'], function() {
+//   return gulp.src('./dist/**/*')
+// });
+
 
 gulp.task('serve', ['build'], function(){
   browserSync({
