@@ -58,6 +58,11 @@ gulp.task('html', function(){
     .pipe(gulp.dest('dist'))
 });
 
+gulp.task('cname', function(){
+  return gulp.src('./src/CNAME')
+    .pipe(gulp.dest('dist'))
+});
+
 gulp.task('media', function(){
   return gulp.src('./src/media/**')
     .pipe(gulp.dest('./dist/media'))
@@ -67,18 +72,11 @@ gulp.task('clean', function(cb) {
     del(['./dist/**/*', './dist'], {'force': true}, cb);
 });
 
-gulp.task('build', ['html', 'styles', 'scripts', 'media']);
-
-gulp.task('deploy-staging', ['build'], function() {
-  return gulp.src('./dist/**/*')
-    .pipe(ghPages());
-});
+gulp.task('build', ['html', 'cname', 'styles', 'scripts', 'media']);
 
 gulp.task('deploy', ['build'], function() {
   return gulp.src('./dist/**/*')
-    .pipe(ghPages({
-      remoteUrl: "git@asdev.net:~/ily.io.git"
-    }));
+    .pipe(ghPages());
 });
 
 // gulp.task('revision', ['build'], function() {
