@@ -38,8 +38,6 @@ dotenv.load()
 // *************************************************************************************************
 
 const buildDir = 'build'
-const pagesPath = 'pages'
-const dataPath = './data/data.json'
 const scriptsDir = 'scripts'
 const stylesPath = 'styles/main.styl'
 const imagesDir = 'images'
