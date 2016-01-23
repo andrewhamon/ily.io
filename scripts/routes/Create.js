@@ -6,7 +6,8 @@ export default React.createClass({
   mixins: [ History ],
 
   propTypes: {
-    history: React.PropTypes.object.isRequired
+    history: React.PropTypes.object.isRequired,
+    location: React.PropTypes.object
   },
 
   componentWillMount () {
@@ -14,9 +15,11 @@ export default React.createClass({
   },
 
   getInitialState () {
+    var sender = this.props.location.query.from
+
     return {
       to: '',
-      from: ''
+      from: sender || ''
     }
   },
 
@@ -55,8 +58,8 @@ export default React.createClass({
           <h1 id='new-header'>Tell them how you really feel.</h1>
           <form onSubmit={this.preview}>
             <div id='link-form'>
-              <div><input type='text' onChange={this.setFrom} placeholder='From' autoComplete='off' /></div>
-              <div><input type='text' onChange={this.setTo} placeholder='To' autoComplete='off' /></div>
+              <div><input type='text' onChange={this.setFrom} value={this.state.from} placeholder='From' autoComplete='off' /></div>
+              <div><input type='text' onChange={this.setTo} value={this.state.to} placeholder='To' autoComplete='off' /></div>
             </div>
             <div className='button'>
               <button type='submit' className='new'>Preview</button>

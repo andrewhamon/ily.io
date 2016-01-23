@@ -35,7 +35,9 @@ export default React.createClass({
             <span className='hidden' id='ily'>ily &lt;3</span>
           </div>
           <span className='hidden' id='sender-footer'>&mdash; {sender}<span className='hidden'> &mdash;</span></span>
-          <Link id='new' className='hidden' to='/new'>Make your own!</Link>
+          <Link id='new' className='hidden' to={`/new?from=${recipient}`}>
+            Make your own!
+          </Link>
         </div>
         <address className='animated'>
           Designed and built by Andrew Hamon.
