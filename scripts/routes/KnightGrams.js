@@ -3,6 +3,7 @@ import { History } from 'react-router'
 
 import Expose from 'routes/knightgrams/Expose'
 import ProductSelector from 'routes/knightgrams/ProductSelector'
+import RecipientInformation from 'routes/knightgrams/RecipientInformation'
 
 export default React.createClass({
   mixins: [ History ],
@@ -28,6 +29,9 @@ export default React.createClass({
 
         <h2>Choose your Valentine's Gift</h2>
         <ProductSelector />
+
+        <h2>Tell us about them.</h2>
+        <RecipientInformation />
       </div>
     )
   }
