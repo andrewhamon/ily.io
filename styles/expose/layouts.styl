@@ -1,7 +1,17 @@
-.expose
-  display: flex
-  padding: 40px 0
-  justify-content: space-around
+.expose > div
+  max-width: 1000px
+  margin: 0 auto
+  padding: 20px 0
+  margin-bottom: 40px
+
+  +large()
+    padding: 40px 0
+    display: flex
+    justify-content: space-around
+
+  +not-large()
+    > article
+      margin-bottom: 40px
 
   > article
     text-align: center

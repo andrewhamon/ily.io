@@ -1,0 +1,31 @@
+.product-selector
+  > .product-item
+    transition: all 0.2s ease
+
+    .button
+      transition: all 0.4s ease
+
+      i
+        max-width: 0
+        opacity: 0
+        transition: all 0.5s ease
+        color: accent
+
+    &:hover:not(.-selected)
+      background: alpha(accent, 10%)
+
+    &:hover, &.-selected
+      .button
+        transform: scale(1.07)
+
+    &.-selected
+      background: accent
+      color: white
+
+      i
+        max-width: 20px
+        opacity: 1
+
+      .button
+        background: white
+        color: accent
