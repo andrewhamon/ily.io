@@ -9,6 +9,7 @@ import createBrowserHistory from 'history/lib/createBrowserHistory'
 import Main from 'layouts/Main'
 import Heart from 'routes/Heart'
 import Create from 'routes/Create'
+import KnightGrams from 'routes/KnightGrams'
 
 // function requireAuth (nextState, replaceState) {
 //   if (!localStorage.user) {
@@ -27,6 +28,7 @@ module.exports = (
     <Route component={Main}>
       <Route path='/' component={Heart} />
       <Route path='/new' component={Create} />
+      <Route path='/knightgrams' component={KnightGrams} />
     </Route>
   </Router>
 )

@@ -16,6 +16,7 @@ export default React.createClass({
       this.props.history.pushState(null, '/new')
     }
 
+    document.title = 'Someone loves you!'
     document.body.className = 'white'
   },
 

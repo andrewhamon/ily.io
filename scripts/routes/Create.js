@@ -11,6 +11,7 @@ export default React.createClass({
   },
 
   componentWillMount () {
+    document.title = 'Tell someone you love them!'
     document.body.className = 'red'
   },
 
