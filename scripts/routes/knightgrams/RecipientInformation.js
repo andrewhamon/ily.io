@@ -11,8 +11,6 @@ export default React.createClass({
         <div className='form-group'>
           <input type='text' placeholder="Valentine's mobile number" />
         </div>
-
-        <input type='submit' className='button -primary' value='Continue' />
       </form>
     )
   }

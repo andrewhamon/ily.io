@@ -48,9 +48,7 @@ const imagesDir = 'images'
 
 gulp.task('default', [ 'build' ])
 
-gulp.task('serve', [ 'watch' ], cb => (
-  sequence([ 'browsersync' ], cb)
-))
+gulp.task('serve', [ 'watch', 'browsersync' ])
 
 gulp.task('build', cb => (
   sequence('clean', [ 'styles', 'bundle', 'index', 'assets' ], cb)
@@ -121,7 +119,7 @@ gulp.task('bundle:watch', () => (
   gulp.watch(path.join(scriptsDir, '**/*.js'), [ 'bundle' ])
 ))
 
-gulp.task('browsersync', () => {
+gulp.task('browsersync', [ 'build' ], () => {
   browserSync({
     server: {
       baseDir: buildDir,

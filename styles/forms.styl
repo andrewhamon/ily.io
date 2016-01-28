@@ -21,5 +21,15 @@ input:not([type='checkbox']), textarea
 .form-group
   margin: 10px 0
 
+.form-row
+  display: flex
+
+  .form-group
+    margin: 0
+
+  .form-group:not(:last-child)
+    margin-right: 10px
+
+
 textarea
   height: 100px

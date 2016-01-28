@@ -11,7 +11,7 @@ export default React.createClass({
         </div>
 
         <div className='form-group'>
-          <input type='checkbox' /> Write my letter in calligraphy (+$2)
+          <label><input type='checkbox' /> Write my letter in calligraphy (+$2)</label>
         </div>
       </form>
     )
