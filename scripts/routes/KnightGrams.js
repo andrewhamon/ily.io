@@ -4,6 +4,7 @@ import { History } from 'react-router'
 import Expose from 'routes/knightgrams/Expose'
 import ProductSelector from 'routes/knightgrams/ProductSelector'
 import RecipientInformation from 'routes/knightgrams/RecipientInformation'
+import MessageDetails from 'routes/knightgrams/MessageDetails'
 
 export default React.createClass({
   mixins: [ History ],
@@ -32,6 +33,9 @@ export default React.createClass({
 
         <h2>Tell us about them.</h2>
         <RecipientInformation />
+
+        <h2>Let's write them a letter.</h2>
+        <MessageDetails />
       </div>
     )
   }

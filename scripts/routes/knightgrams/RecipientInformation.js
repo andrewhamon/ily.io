@@ -3,7 +3,7 @@ import React from 'react'
 export default React.createClass({
   render () {
     return (
-      <form>
+      <form className='recipient-information'>
         <div className='form-group'>
           <input type='text' placeholder="Valentine's name (or nickname)" />
         </div>
