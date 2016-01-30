@@ -10,7 +10,7 @@ function _saveUser (user) {
 }
 
 module.exports = {
-  currentUser: JSON.parse(localStorage.customer || 'null'),
+  currentUser: JSON.parse(localStorage.user || 'null'),
 
   register (user) {
     return BaseService.post('register', { user }).then(_saveUser)

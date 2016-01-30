@@ -2,7 +2,8 @@ import React from 'react'
 
 export default React.createClass({
   propTypes: {
-    maxLength: React.PropTypes.number.isRequired
+    maxLength: React.PropTypes.number.isRequired,
+    onChange: React.PropTypes.func
   },
 
   getInitialState () {
@@ -13,6 +14,7 @@ export default React.createClass({
 
   setMessage (event) {
     this.setState({ value: event.target.value.trim() })
+    this.props.onChange && this.props.onChange(event)
   },
 
   render () {

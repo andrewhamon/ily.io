@@ -3,7 +3,8 @@
   "plugins": [ "standard" ],
   "globals": {
     "localStorage": false,
-    "fetch": false
+    "fetch": false,
+    "Stripe": false
   },
   "rules": {
     "array-bracket-spacing": [ 2, "always" ],
