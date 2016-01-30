@@ -15,9 +15,46 @@ export default React.createClass({
     history: React.PropTypes.object.isRequired
   },
 
+  getInitialState () {
+    return {}
+  },
+
   componentWillMount () {
     document.title = 'KnightGrams – Send a fellow Knight some love!'
     document.body.className = 'knightgrams'
+  },
+
+  selectProduct (product) {
+    this.setState({ product, product_id: product.id })
+  },
+
+  setOrderField (field, value) {
+    this.setState({ [field]: value })
+  },
+
+  getSummary () {
+    if (this.state.valid) {
+      return (
+        <div className='site-section summary-section'>
+          <p className='summary'>
+            We're going to send{' '}
+            <strong>{this.state.product && this.state.product.title} </strong>
+            to{' '}
+            <strong>{this.state.recipient_phone_number}</strong>.
+            You'll be charged{' '}
+            <strong>$6.99</strong>. All good?
+          </p>
+
+          <button className='button -primary'>Let's do it!</button>
+        </div>
+      )
+    } else {
+      return (
+        <div className='site-section summary-section'>
+          <p>Whoa, pal! We need some more info. Go double check what you entered.</p>
+        </div>
+      )
+    }
   },
 
   render () {
@@ -31,12 +68,14 @@ export default React.createClass({
 
         <div className='site-section'>
           <h2>Choose your Valentine's gift</h2>
-          <ProductSelector />
+          <ProductSelector onChange={this.selectProduct} />
         </div>
 
         <div className='site-section'>
           <h2>Tell us about them.</h2>
-          <RecipientInformation />
+          <RecipientInformation
+            onNameChange={this.setOrderField.bind(this, 'recipient_name')}
+            onPhoneChange={this.setOrderField.bind(this, 'recipient_phone_number')} />
         </div>
 
         <div className='site-section'>
@@ -50,18 +89,7 @@ export default React.createClass({
           <SenderInformation />
         </div>
 
-        <div className='site-section summary-section'>
-          <p className='summary'>
-            We're going to send{' '}
-            <strong>1 rose </strong>
-            to{' '}
-            <strong>(813) 316-8895</strong>.
-            You'll be charged{' '}
-            <strong>$6.99</strong>. All good?
-          </p>
-
-          <button className='button -primary'>Let's do it!</button>
-        </div>
+        {this.getSummary()}
       </div>
     )
   }

@@ -5,6 +5,10 @@ import Money from 'common/Money'
 import ProductService from 'services/ProductService'
 
 export default React.createClass({
+  propTypes: {
+    onChange: React.PropTypes.func
+  },
+
   getInitialState () {
     return {
       products: [],
@@ -25,6 +29,7 @@ export default React.createClass({
 
   selectProduct (product) {
     this.setState({ selectedProduct: product })
+    this.props.onChange && this.props.onChange(product)
   },
 
   getChooseLabel (product) {
