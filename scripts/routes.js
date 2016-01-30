@@ -10,18 +10,13 @@ import Main from 'layouts/Main'
 import Heart from 'routes/Heart'
 import Create from 'routes/Create'
 import KnightGrams from 'routes/KnightGrams'
+import Thanks from 'routes/Thanks'
 
-// function requireAuth (nextState, replaceState) {
-//   if (!localStorage.user) {
-//     replaceState({ nextPathname: nextState.location.pathname }, '/login')
-//   }
-// }
-//
-// function skipAuth (nextState, replaceState) {
-//   if (localStorage.user) {
-//     replaceState({ nextPathname: nextState.location.pathname }, '/')
-//   }
-// }
+function requireAuth (nextState, replaceState) {
+  if (!localStorage.user) {
+    replaceState({ nextPathname: nextState.location.pathname }, '/knightgrams')
+  }
+}
 
 module.exports = (
   <Router history={createBrowserHistory()}>
@@ -29,6 +24,10 @@ module.exports = (
       <Route path='/' component={Heart} />
       <Route path='/new' component={Create} />
       <Route path='/knightgrams' component={KnightGrams} />
+
+      <Route onEnter={requireAuth}>
+        <Route path='/knightgrams/thanks' component={Thanks} />
+      </Route>
     </Route>
   </Router>
 )
