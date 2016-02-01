@@ -1,6 +1,7 @@
 .product-selector
-  display: flex
-  justify-content: center
+  +large()
+    display: flex
+    justify-content: center
 
   > .product-item
     padding: 0 20px
@@ -8,5 +9,23 @@
     padding: 20px 10px
     cursor: pointer
 
-    &:not(:last-child)
-      border-right: 1px solid alpha(accent, 30%)
+    +not-large()
+      display: flex
+      padding: 20px
+      align-items: center
+      border: 1px solid #ccc
+      margin-bottom: 10px
+
+      p
+        margin-bottom: 0 !important
+
+      aside:first-child
+        text-align: left
+
+      aside:last-child
+        flex-shrink: 0
+        width: 35%
+
+    +large()
+      &:not(:last-child)
+        border-right: 1px solid alpha(accent, 30%)

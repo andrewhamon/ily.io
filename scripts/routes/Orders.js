@@ -1,6 +1,7 @@
 import React from 'react'
 import sample from 'lodash/sample'
 import cx from 'classnames'
+import { Link } from 'react-router'
 
 import OrderService from 'services/OrderService'
 
@@ -69,7 +70,7 @@ export default React.createClass({
           <p>We'll text you soon with details about when and where to pickup your KnightGrams. You can also check this page for updates.</p>
         </div>
 
-        <div className='site-section'>
+        <div className='site-section order-list'>
           {this.state.orders.map(order =>
             <div className='order' key={order.id}>
               <div className='details'>
@@ -79,7 +80,10 @@ export default React.createClass({
               <p className={cx('status', order.status)}>{order.status}</p>
             </div>
           )}
+
         </div>
+
+        <Link to='/knightgrams' className='button -primary'>Send someone a KnightGram!</Link>
       </div>
     )
   }

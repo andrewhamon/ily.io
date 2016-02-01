@@ -48,13 +48,18 @@ export default React.createClass({
             className={cx('product-item', { '-selected': this.isSelected(product) })}
             onClick={this.selectProduct.bind(this, product)}>
 
-            <h3 className='title'>{product.title}</h3>
-            <p className='description'>{product.description}</p>
-            <p className='price'><Money>{product.price_in_cents}</Money></p>
+            <aside>
+              <h3 className='title'>{product.title}</h3>
+              <p className='description'>{product.description}</p>
+            </aside>
 
-            <button className='button -primary choose-button'>
-              <span><i className='fa fa-check'></i> {this.getChooseLabel(product)}</span>
-            </button>
+            <aside>
+              <p className='price'><Money>{product.price_in_cents}</Money></p>
+
+              <button className='button -primary choose-button'>
+                <span><i className='fa fa-check'></i> {this.getChooseLabel(product)}</span>
+              </button>
+            </aside>
           </div>
         ))}
       </div>
