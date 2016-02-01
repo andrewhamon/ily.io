@@ -49,7 +49,7 @@ export default React.createClass({
 
   _submit () {
     OrderService.create(this.state).then(
-      order => console.log(order),
+      this.history.pushState(null, '/thanks'),
       error => console.error(error))
   },
 
@@ -86,7 +86,7 @@ export default React.createClass({
     } else {
       return (
         <div className='site-section summary-section'>
-          <p>Whoa, pal! We need some more info. Go double check what you entered.</p>
+          <p>Wait! We need some more info. Go double check what you entered.</p>
         </div>
       )
     }
@@ -126,7 +126,7 @@ export default React.createClass({
 
           <SenderInformation
             onNameChange={this.setOrderField.bind(this, 'sender_name')}
-            onEmailChange={this.setOrderField.bind(this, '')}
+            onEmailChange={this.setOrderField.bind(this, 'email')}
             onStripeToken={this.setStripeToken} />
         </div>
 

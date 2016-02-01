@@ -4,7 +4,8 @@ import every from 'lodash/every'
 
 export default React.createClass({
   propTypes: {
-    onStripeToken: React.PropTypes.func.isRequired
+    onStripeToken: React.PropTypes.func.isRequired,
+    onEmailChange: React.PropTypes.func.isRequired
   },
 
   getInitialState () {
@@ -19,6 +20,10 @@ export default React.createClass({
 
   handleChange () {
     this.checkCardValid()
+  },
+
+  handleEmailChange (event) {
+    this.props.onEmailChange(event.target.value)
   },
 
   getError () {
@@ -56,7 +61,7 @@ export default React.createClass({
     return (
       <form ref='form' onChange={this.handleChange}>
         <div className='form-group'>
-          <input type='email' placeholder='Your e-mail address' />
+          <input type='email' onChange={this.handleEmailChange} placeholder='Your e-mail address' />
         </div>
         <div className='form-group'>
           <input type='tel' ref='number' data-stripe='number' placeholder='Card number' />

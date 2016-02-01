@@ -25,11 +25,12 @@ module.exports = (
       <Route path='/' component={Heart} />
       <Route path='/new' component={Create} />
       <Route path='/knightgrams' component={KnightGrams} />
-      <Route path='/:token' component={Orders} />
 
       <Route onEnter={requireAuth}>
-        <Route path='/knightgrams/thanks' component={Thanks} />
+        <Route path='/thanks' component={Thanks} />
       </Route>
+
+      <Route path='/:token' component={Orders} />
     </Route>
   </Router>
 )
