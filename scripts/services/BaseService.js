@@ -68,6 +68,6 @@ module.exports = {
   },
 
   _url (uri) {
-    return `//knightgrams.herokuapp.com/${uri}`
+    return `https://knightgrams.herokuapp.com/${uri}`
   }
 }
