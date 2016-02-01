@@ -39,7 +39,7 @@ export default React.createClass({
   },
 
   getPluralizedPhrase () {
-    if (!this.state.orders.length === 0) return ''
+    if (this.state.orders.length === 0) return ''
 
     if (this.state.orders.length === 1) {
       return 'a KnightGram candygram'
