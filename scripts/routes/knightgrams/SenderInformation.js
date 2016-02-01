@@ -56,17 +56,20 @@ export default React.createClass({
     return (
       <form ref='form' onChange={this.handleChange}>
         <div className='form-group'>
-          <input type='text' ref='number' data-stripe='number' placeholder='Card number' />
+          <input type='email' placeholder='Your e-mail address' />
+        </div>
+        <div className='form-group'>
+          <input type='tel' ref='number' data-stripe='number' placeholder='Card number' />
         </div>
         <div className='form-row'>
           <div className='form-group'>
-            <input type='text' ref='expMonth' data-stripe='exp-month' className='exp-field -mm' maxLength='2' placeholder='MM' />
+            <input type='tel' ref='expMonth' data-stripe='exp-month' className='exp-field -mm' maxLength='2' placeholder='MM' />
           </div>
           <div className='form-group'>
-            <input type='text' ref='expYear' data-stripe='exp-year' className='exp-field -yy' maxLength='4' placeholder='YY' />
+            <input type='tel' ref='expYear' data-stripe='exp-year' className='exp-field -yy' maxLength='4' placeholder='YY' />
           </div>
           <div className='form-group'>
-            <input type='text' ref='cvc' data-stripe='cvc' maxLength='4' placeholder='CVC' />
+            <input type='tel' ref='cvc' data-stripe='cvc' className='cvc' maxLength='4' placeholder='CVC' />
           </div>
         </div>
 

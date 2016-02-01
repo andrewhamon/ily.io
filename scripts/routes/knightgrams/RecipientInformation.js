@@ -22,7 +22,7 @@ export default React.createClass({
         </div>
 
         <div className='form-group'>
-          <input type='text' onChange={this.setPhone} placeholder="Valentine's mobile number" />
+          <input type='tel' onChange={this.setPhone} placeholder="Valentine's mobile number" />
         </div>
       </form>
     )

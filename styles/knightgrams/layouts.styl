@@ -18,7 +18,7 @@
       width: 100%
       height: auto
 
-  &.-thanks
+  &.-thanks, &.-orders
     padding-bottom: 80px
 
     header[role='main']
@@ -26,10 +26,52 @@
       background: accent
 
     p
-      width: 500px
+      max-width: 500px
       line-height: 1.5
       text-align: left
       margin: 15px auto
 
+  &.-orders
+    .site-section
+      margin-top: 0
+
   .recipient-information
     margin-bottom: 60px
+
+  .exp-field, .cvc
+    text-align: center
+
+  .order
+    padding: 15px
+    margin-bottom: 15px
+    border: 1px solid lighten(accent, 60%)
+    border-radius: 4px
+    display: flex
+    justify-content: space-between
+    align-items: center
+
+    p
+      margin: 0
+
+      &.producttitle
+        font-weight: bold
+
+      &.sentto
+        color: #777
+
+        em
+          font-weight: 400
+
+      &.status
+        color: white
+        padding: 3px 10px
+        display: inline-block
+        border-radius: 3px
+        font-size: 0.8em
+        color: #ccc
+        border: 1px solid
+
+        &:not(.processing)
+          border: 1px solid accent
+          color: white
+          background: accent

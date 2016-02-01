@@ -11,6 +11,7 @@ import Heart from 'routes/Heart'
 import Create from 'routes/Create'
 import KnightGrams from 'routes/KnightGrams'
 import Thanks from 'routes/Thanks'
+import Orders from 'routes/Orders'
 
 function requireAuth (nextState, replaceState) {
   if (!localStorage.user) {
@@ -24,6 +25,7 @@ module.exports = (
       <Route path='/' component={Heart} />
       <Route path='/new' component={Create} />
       <Route path='/knightgrams' component={KnightGrams} />
+      <Route path='/:token' component={Orders} />
 
       <Route onEnter={requireAuth}>
         <Route path='/knightgrams/thanks' component={Thanks} />
