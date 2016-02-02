@@ -49,7 +49,7 @@ export default React.createClass({
 
   _submit () {
     OrderService.create(this.state).then(
-      this.history.pushState(null, '/thanks'),
+      () => this.history.pushState(null, '/thanks'),
       error => console.error(error))
   },
 
