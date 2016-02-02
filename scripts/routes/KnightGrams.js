@@ -2,6 +2,7 @@ import React from 'react'
 import { History } from 'react-router'
 import debounce from 'lodash/debounce'
 
+import BaseService from 'services/BaseService'
 import AuthService from 'services/AuthService'
 import OrderService from 'services/OrderService'
 
@@ -9,7 +10,6 @@ import Expose from 'routes/knightgrams/Expose'
 import ProductSelector from 'routes/knightgrams/ProductSelector'
 import RecipientInformation from 'routes/knightgrams/RecipientInformation'
 import MessageDetails from 'routes/knightgrams/MessageDetails'
-import SenderInformation from 'routes/knightgrams/SenderInformation'
 import Money from 'common/money'
 
 export default React.createClass({
@@ -32,22 +32,41 @@ export default React.createClass({
       AuthService.register()
     }
 
+    BaseService.get('stripe_token').then(token => {
+      this.stripeHandler = StripeCheckout.configure({
+        key: token.publishable_key,
+        locale: 'auto',
+        token: token => {
+          this.setState({
+            stripe_token: token.id,
+            email: token.email
+          }, () => {
+            this._createOrder()
+          })
+        }
+      })
+    })
+
     this.updateSummary = debounce(this._updateSummary, 300)
   },
 
   _updateSummary () {
-    if (this.state.stripe_token) {
-      OrderService.dryRun(this.state).then(
-        order => {
-          this.setState({ order, valid: true })
-        },
-        () => this.setState({ valid: false }))
-    } else {
-      this.setState({ valid: false })
-    }
+    OrderService.dryRun(this.state).then(
+      order => {
+        this.setState({ order, valid: true })
+      },
+      () => this.setState({ valid: false }))
   },
 
   _submit () {
+    this.stripeHandler.open({
+      name: 'KnightGrams',
+      description: this.state.order.product.title,
+      amount: this.state.order.price_in_cents
+    })
+  },
+
+  _createOrder () {
     OrderService.create(this.state).then(
       () => this.history.pushState(null, '/thanks'),
       error => console.error(error))
@@ -63,10 +82,6 @@ export default React.createClass({
     this.updateSummary()
   },
 
-  setStripeToken (stripeToken) {
-    this.setState({ stripe_token: stripeToken }, this._updateSummary)
-  },
-
   getSummary () {
     if (this.state.valid) {
       return (
@@ -80,7 +95,7 @@ export default React.createClass({
             <strong><Money>{this.state.order.price_in_cents}</Money></strong>. All good?
           </p>
 
-          <button onClick={this._submit} className='button -primary'>Let's do it!</button>
+          <button onClick={this._submit} className='button -primary'>Checkout with Stripe!</button>
         </div>
       )
     } else {
@@ -118,16 +133,6 @@ export default React.createClass({
           <MessageDetails
             onChange={this.setOrderField.bind(this, 'message')}
             onUpgradesChange={this.setOrderField.bind(this, 'upgrade_ids')} />
-        </div>
-
-        <div className='site-section'>
-          <h2><i className='fa fa-lock'></i> Payment information</h2>
-          <p>We will never store your credit card information.</p>
-
-          <SenderInformation
-            onNameChange={this.setOrderField.bind(this, 'sender_name')}
-            onEmailChange={this.setOrderField.bind(this, 'email')}
-            onStripeToken={this.setStripeToken} />
         </div>
 
         {this.getSummary()}

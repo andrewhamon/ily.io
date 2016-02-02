@@ -4,7 +4,7 @@
   "globals": {
     "localStorage": false,
     "fetch": false,
-    "Stripe": false
+    "StripeCheckout": false
   },
   "rules": {
     "array-bracket-spacing": [ 2, "always" ],
