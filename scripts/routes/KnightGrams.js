@@ -136,6 +136,32 @@ export default React.createClass({
         </div>
 
         {this.getSummary()}
+
+        <footer>
+          <h3>About</h3>
+
+          <p>Questions? Concerns? <a href='mailto:knightgrams@ily.io'>Send us an email</a>!</p>
+
+          <p>
+            We're Andrew Hamon and Steven Petryk, two third-year UCF students. We wanted to make
+            UCF's first candygram, and this is the result. We hope people will use this to spread joy!
+          </p>
+
+          <p className='notice'>
+            Your information is securely processed over HTTPS. The only thing your crush sees
+            is the message you write to them. We guarantee we'll make every effort to get your
+            KnightGram in your crush's hands.
+          </p>
+
+          <p className='notice'>
+            If you decide you want to cancel your KnightGram, send us an email from the same
+            address you provided. Make sure to include the phone number you sent the KnightGram to.
+            As long as your crush hasn't picked it up yet, we'll give you a full refund,
+            no questions asked.
+          </p>
+
+          <p>– Andrew Hamon and Steven Petryk</p>
+        </footer>
       </div>
     )
   }
