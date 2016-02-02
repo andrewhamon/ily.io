@@ -93,13 +93,13 @@ gulp.task('assets:watch', () => (
 ))
 
 gulp.task('index', () => (
-  gulp.src('200.html')
+  gulp.src('**/*.html')
     .pipe(gulp.dest(buildDir))
     .pipe(browserSync.stream())
 ))
 
 gulp.task('pages:watch', () => {
-  gulp.watch('200.html', [ 'index' ])
+  gulp.watch('**/*.html', [ 'index' ])
 })
 
 var bundleOpts = { debug: true, paths: [ './scripts' ], cacheFile: '.browserifyCache.json' }
