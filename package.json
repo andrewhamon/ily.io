@@ -60,9 +60,12 @@
     "history": "^1.17.0",
     "isomorphic-fetch": "^2.2.1",
     "jquery": "^2.2.0",
+    "keen-js": "^3.3.0",
     "lodash": "^4.0.0",
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
-    "react-router": "^1.0.3"
+    "react-router": "^1.0.3",
+    "urijs": "^1.17.0",
+    "useragent": "^2.1.8"
   }
 }
