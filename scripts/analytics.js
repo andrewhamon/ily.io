@@ -3,6 +3,8 @@ import UserAgent from './userAgent'
 import URI from 'urijs'
 
 module.exports = {
+  idempotencyTable: {},
+
   recordPageView (callback) {
     var {
       host, protocol, href, pathname
@@ -15,7 +17,14 @@ module.exports = {
     this._recordEvent('pageViews', { url, referrer, userAgent }, callback)
   },
 
-  _recordEvent (eventName, event, callback) {
+  recordIdempotentEvent (eventName, event, callback) {
+    if (this.idempotencyTable[eventName]) return
+
+    this.idempotencyTable[eventName] = true
+    this._recordEvent(eventName, event, callback)
+  },
+
+  _recordEvent (eventName, event = {}, callback) {
     event.sessionId = this.getSessionId()
     event.referrer = URI.parseQuery(window.location.search).referrer || null
 

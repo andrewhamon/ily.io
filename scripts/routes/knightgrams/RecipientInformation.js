@@ -1,4 +1,5 @@
 import React from 'react'
+import Analytics from 'analytics'
 
 export default React.createClass({
   propTypes: {
@@ -7,10 +8,12 @@ export default React.createClass({
   },
 
   setName (event) {
+    Analytics.recordIdempotentEvent('setRecipientName')
     this.props.onNameChange(event.target.value)
   },
 
   setPhone (event) {
+    Analytics.recordIdempotentEvent('setRecipientPhone')
     this.props.onPhoneChange(event.target.value)
   },
 

@@ -13,6 +13,8 @@ import RecipientInformation from 'routes/knightgrams/RecipientInformation'
 import MessageDetails from 'routes/knightgrams/MessageDetails'
 import Money from 'common/money'
 
+import Analytics from 'analytics'
+
 export default React.createClass({
   mixins: [ History ],
 
@@ -58,6 +60,7 @@ export default React.createClass({
   },
 
   _submit () {
+    Analytics.recordIdempotentEvent('submitOrder')
     this.stripeHandler.open({
       name: 'KnightGrams',
       description: this.getProductList(),
@@ -105,8 +108,6 @@ export default React.createClass({
             You'll be charged{' '}
             <strong><Money>{this.state.order.price_in_cents}</Money></strong>. All good?
           </p>
-
-          <button onClick={this._submit} className='button -primary'>Checkout with Stripe!</button>
         </div>
       )
     } else {
@@ -147,6 +148,10 @@ export default React.createClass({
         </div>
 
         {this.getSummary()}
+
+        <button onClick={this._submit} disabled={!this.state.valid} className='button -primary -checkout'>
+          Checkout with Stripe!
+        </button>
 
         <footer>
           <h3>About</h3>

@@ -12,10 +12,17 @@
     transition: all 0.2s ease
     text-decoration: none
 
-    &:hover
+    &:disabled, &.disabled
+      cursor: not-allowed
+
+    &:hover:not(:disabled):not(.disabled)
       transform: scale(1.03)
 
     &.-primary
       background: accent
       color: white
       font-weight: 300
+
+      &.disabled, &:disabled
+        background: #888
+        opacity: 0.2
