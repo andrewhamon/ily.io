@@ -1,6 +1,10 @@
 import React from 'react'
 import cx from 'classnames'
 
+import map from 'lodash/map'
+import without from 'lodash/without'
+import includes from 'lodash/includes'
+
 import Money from 'common/Money'
 import ProductService from 'services/ProductService'
 
@@ -12,7 +16,7 @@ export default React.createClass({
   getInitialState () {
     return {
       products: [],
-      selectedProduct: null
+      selectedProducts: []
     }
   },
 
@@ -24,12 +28,22 @@ export default React.createClass({
   },
 
   isSelected (product) {
-    return this.state.selectedProduct === product
+    return includes(this.state.selectedProducts, product)
   },
 
-  selectProduct (product) {
-    this.setState({ selectedProduct: product })
-    this.props.onChange && this.props.onChange(product)
+  toggleProduct (product) {
+    var selectedProducts
+
+    if (includes(this.state.selectedProducts, product)) {
+      selectedProducts = without(this.state.selectedProducts, product)
+    } else {
+      this.state.selectedProducts.push(product)
+      selectedProducts = this.state.selectedProducts
+    }
+
+    this.setState({ selectedProducts }, () => {
+      this.props.onChange && this.props.onChange(map(this.state.selectedProducts, 'id'))
+    })
   },
 
   getChooseLabel (product) {
@@ -46,7 +60,7 @@ export default React.createClass({
         {this.state.products.map(product => (
           <div key={product.id}
             className={cx('product-item', { '-selected': this.isSelected(product) })}
-            onClick={this.selectProduct.bind(this, product)}>
+            onClick={this.toggleProduct.bind(this, product)}>
 
             <aside>
               <h3 className='title'>{product.title}</h3>

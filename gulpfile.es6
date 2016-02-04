@@ -136,16 +136,25 @@ gulp.task('uglify', [ 'build' ], () => (
     .pipe(gulp.dest(path.join(buildDir, scriptsDir)))
 ))
 
-gulp.task('deploy', [ 'build', 'uglify' ], () => {
+function checkGit () {
   var branch = sh.exec('git rev-parse --abbrev-ref HEAD', { silent: true }).output.trim()
   var changes = sh.exec('git diff-files --quiet --ignore-submodules').code !== 0
 
   if (branch !== 'master' || changes) {
     throw new Error('the current git branch must be `master` and there must be no uncommitted changes.')
   }
+}
+
+gulp.task('deploy', [ 'build', 'uglify' ], () => {
+  if (process.env.NODE_ENV === 'production') {
+    checkGit()
+    var domain = fs.readFileSync('./CNAME')
+  } else {
+    domain = fs.readFileSync('./CNAME_STAGING')
+  }
 
   return surge({
     project: buildDir,
-    domain: fs.readFileSync('./CNAME')
+    domain
   })
 })

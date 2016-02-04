@@ -1,6 +1,7 @@
 import React from 'react'
 import { History } from 'react-router'
 import debounce from 'lodash/debounce'
+import map from 'lodash/map'
 
 import BaseService from 'services/BaseService'
 import AuthService from 'services/AuthService'
@@ -52,16 +53,14 @@ export default React.createClass({
 
   _updateSummary () {
     OrderService.dryRun(this.state).then(
-      order => {
-        this.setState({ order, valid: true })
-      },
+      order => this.setState({ order, valid: true }),
       () => this.setState({ valid: false }))
   },
 
   _submit () {
     this.stripeHandler.open({
       name: 'KnightGrams',
-      description: this.state.order.product.title,
+      description: this.getProductList(),
       amount: this.state.order.price_in_cents
     })
   },
@@ -72,8 +71,8 @@ export default React.createClass({
       error => console.error(error))
   },
 
-  selectProduct (product) {
-    this.setState({ product_id: product.id })
+  selectProducts (productIds) {
+    this.setState({ product_ids: productIds })
     this.updateSummary()
   },
 
@@ -82,13 +81,25 @@ export default React.createClass({
     this.updateSummary()
   },
 
+  getProductList () {
+    var titles = map(this.state.order.products, 'title')
+    if (this.state.order.products.length === 1) {
+      return titles[0]
+    } else if (this.state.order.products.length === 2) {
+      return titles.join(' and ')
+    } else {
+      titles[titles.length - 1] = 'and ' + titles[titles.length - 1]
+      return titles.join(', ')
+    }
+  },
+
   getSummary () {
     if (this.state.valid) {
       return (
         <div className='site-section summary-section'>
           <p className='summary'>
             We're going to send{' '}
-            <strong>{this.state.order && this.state.order.product.title} </strong>
+            <strong>{this.getProductList()} </strong>
             to{' '}
             <strong>{this.state.order.recipient_phone_number}</strong>.
             You'll be charged{' '}
@@ -118,7 +129,7 @@ export default React.createClass({
 
         <div className='site-section'>
           <h2>Choose your Valentine's gift</h2>
-          <ProductSelector onChange={this.selectProduct} />
+          <ProductSelector onChange={this.selectProducts} />
         </div>
 
         <div className='site-section'>
