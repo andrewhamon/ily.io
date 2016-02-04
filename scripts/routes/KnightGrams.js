@@ -13,6 +13,8 @@ import RecipientInformation from 'routes/knightgrams/RecipientInformation'
 import MessageDetails from 'routes/knightgrams/MessageDetails'
 import Money from 'common/money'
 
+import Analytics from 'analytics'
+
 export default React.createClass({
   mixins: [ History ],
 
@@ -58,6 +60,7 @@ export default React.createClass({
   },
 
   _submit () {
+    Analytics.recordIdempotentEvent('submitOrder')
     this.stripeHandler.open({
       name: 'KnightGrams',
       description: this.getProductList(),

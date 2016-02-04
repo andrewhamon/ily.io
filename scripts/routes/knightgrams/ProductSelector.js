@@ -7,6 +7,7 @@ import includes from 'lodash/includes'
 
 import Money from 'common/Money'
 import ProductService from 'services/ProductService'
+import Analytics from 'analytics'
 
 export default React.createClass({
   propTypes: {
@@ -32,6 +33,8 @@ export default React.createClass({
   },
 
   toggleProduct (product) {
+    Analytics.recordIdempotentEvent('selectProduct')
+
     var selectedProducts
 
     if (includes(this.state.selectedProducts, product)) {

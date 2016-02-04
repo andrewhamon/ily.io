@@ -4,6 +4,7 @@ import UpgradeService from 'services/UpgradeService'
 
 import Money from 'common/Money'
 import LengthLimitedTextarea from 'common/LengthLimitedTextarea'
+import Analytics from 'analytics'
 
 export default React.createClass({
   propTypes: {
@@ -24,6 +25,7 @@ export default React.createClass({
   },
 
   handleChange (event) {
+    Analytics.recordIdempotentEvent('setMessage')
     this.props.onChange(event.target.value)
   },
 

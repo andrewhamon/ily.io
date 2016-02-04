@@ -1,6 +1,7 @@
 import React from 'react'
 import sample from 'lodash/sample'
 import cx from 'classnames'
+import map from 'lodash/map'
 import { Link } from 'react-router'
 
 import OrderService from 'services/OrderService'
@@ -48,6 +49,18 @@ export default React.createClass({
     }
   },
 
+  getProductTitles (order) {
+    var titles = map(order.products, 'title')
+    if (order.products.length === 1) {
+      return titles[0]
+    } else if (order.products.length === 2) {
+      return titles.join(' and ')
+    } else {
+      titles[titles.length - 1] = 'and ' + titles[titles.length - 1]
+      return titles.join(', ')
+    }
+  },
+
   _getOrder () {
     OrderService.getRecipientOrder(this.props.params.token).then(orders =>
       this.setState({ orders }))
@@ -74,7 +87,7 @@ export default React.createClass({
           {this.state.orders.map(order =>
             <div className='order' key={order.id}>
               <div className='details'>
-                <p className='producttitle'>{order.product.title}</p>
+                <p className='producttitle'>{this.getProductTitles(order)}</p>
                 <p className='sentto'>Sent to: <em>{order.recipient_name}</em></p>
               </div>
               <p className={cx('status', order.status)}>{order.status}</p>
