@@ -1,6 +1,7 @@
 import React from 'react'
 import { History } from 'react-router'
 import debounce from 'lodash/debounce'
+import cx from 'classnames'
 import map from 'lodash/map'
 
 import BaseService from 'services/BaseService'
@@ -69,6 +70,10 @@ export default React.createClass({
   },
 
   _createOrder () {
+    Analytics._recordEvent('createOrder')
+
+    this.setState({ loading: true })
+
     OrderService.create(this.state).then(
       () => this.history.pushState(null, '/thanks'),
       error => console.error(error))
@@ -149,8 +154,10 @@ export default React.createClass({
 
         {this.getSummary()}
 
-        <button onClick={this._submit} disabled={!this.state.valid} className='button -primary -checkout'>
-          Checkout with Stripe!
+        <button onClick={this._submit} disabled={!this.state.valid}
+          className={cx('button -primary -checkout', { loading: this.state.loading })}>
+          <p>Checkout with Stripe!</p>
+          <p className='loaders'><i className='fa fa-fw fa-spin fa-circle-o-notch'></i></p>
         </button>
 
         <footer>

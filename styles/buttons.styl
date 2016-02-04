@@ -11,6 +11,29 @@
     cursor: pointer
     transition: all 0.2s ease
     text-decoration: none
+    position: relative
+    min-height: 50px
+    overflow: hidden
+
+    p
+      display: block
+      position: absolute
+      top: 10px
+      bottom: 0
+      left: 0
+      right: 0
+      text-align: center
+      transition: all 0.2s ease
+
+    p.loaders
+      transform: translateY(40px)
+
+    &.loading
+      p
+        transform: translateY(-40px)
+
+      p.loaders
+        transform: translateY(0px)
 
     &:disabled, &.disabled
       cursor: not-allowed
