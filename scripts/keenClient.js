@@ -1,6 +1,13 @@
 import Keen from 'keen-js'
 
-module.exports = new Keen({
-  projectId: '56b02fc246f9a76bff0c01b1',
-  writeKey: 'b242dffdc022d25619468b3b6d8f893c3393bd336ec7d5df97564150853f148124679bf1c3c2e4bf87926c31624f8d968ff48ae776e9bd10307430dc6d4ef37407cfd17b9ec70292820887aa97e9a4ac14a58780802991c1555c10dbf8d6c416'
-})
+if (process.env.NODE_ENV === 'production') {
+  module.exports = new Keen({
+    projectId: process.env.PRODUCTION_KEEN_PROJECT_ID,
+    writeKey: process.env.PRODUCTION_KEEN_WRITE_KEY
+  })
+} else {
+  module.exports = new Keen({
+    projectId: process.env.STAGING_KEEN_PROJECT_ID,
+    writeKey: process.env.STAGING_KEEN_WRITE_KEY
+  })
+}

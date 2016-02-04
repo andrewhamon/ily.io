@@ -68,6 +68,10 @@ module.exports = {
   },
 
   _url (uri) {
-    return `https://knightgrams.herokuapp.com/${uri}`
+    if (process.env.NODE_ENV === 'production') {
+      return `${process.env.PRODUCTION_API_BASE}/${uri}`
+    } else {
+      return `${process.env.STAGING_API_BASE}/${uri}`
+    }
   }
 }
