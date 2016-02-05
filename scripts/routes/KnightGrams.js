@@ -135,6 +135,7 @@ export default React.createClass({
 
         <div className='site-section'>
           <h2>Choose your Valentine's gift</h2>
+          <p>You can choose multiple</p>
           <ProductSelector onChange={this.selectProducts} />
         </div>
 
