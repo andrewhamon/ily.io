@@ -5,7 +5,6 @@ import cx from 'classnames'
 import map from 'lodash/map'
 
 import BaseService from 'services/BaseService'
-import AuthService from 'services/AuthService'
 import OrderService from 'services/OrderService'
 
 import Expose from 'routes/knightgrams/Expose'
@@ -31,10 +30,6 @@ export default React.createClass({
   componentWillMount () {
     document.title = 'KnightGrams – Send a fellow Knight some love!'
     document.body.className = 'knightgrams'
-
-    if (!AuthService.currentUser) {
-      AuthService.register()
-    }
 
     BaseService.get('stripe_token').then(token => {
       this.stripeHandler = StripeCheckout.configure({

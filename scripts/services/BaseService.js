@@ -2,7 +2,6 @@ import defaultsDeep from 'lodash/defaultsDeep'
 
 module.exports = {
   get (uri, options = {}) {
-    this._authOptions(options)
     return this._wrap(fetch(this._url(uri), options))
   },
 
@@ -15,7 +14,6 @@ module.exports = {
   },
 
   delete (uri, options = {}) {
-    this._authOptions(options)
     return this._wrap(fetch(this._url(uri), { method: 'delete' }))
   },
 
@@ -32,18 +30,6 @@ module.exports = {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(body)
-    })
-
-    this._authOptions(options)
-
-    return options
-  },
-
-  _authOptions (options) {
-    defaultsDeep(options, {
-      headers: {
-        Authorization: `Token ${localStorage.token}`
-      }
     })
 
     return options
