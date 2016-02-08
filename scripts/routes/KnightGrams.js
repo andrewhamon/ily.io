@@ -69,6 +69,8 @@ export default React.createClass({
 
     this.setState({ loading: true })
 
+    console.log('made it this far')
+
     OrderService.create(this.state).then(
       () => this.history.pushState(null, '/thanks'),
       error => console.error(error))

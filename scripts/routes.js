@@ -13,23 +13,13 @@ import KnightGrams from 'routes/KnightGrams'
 import Thanks from 'routes/Thanks'
 import Orders from 'routes/Orders'
 
-function requireAuth (nextState, replaceState) {
-  if (!localStorage.user) {
-    replaceState({ nextPathname: nextState.location.pathname }, '/knightgrams')
-  }
-}
-
 module.exports = (
   <Router history={createBrowserHistory()}>
     <Route component={Main}>
       <Route path='/' component={Heart} />
       <Route path='/new' component={Create} />
       <Route path='/knightgrams' component={KnightGrams} />
-
-      <Route onEnter={requireAuth}>
-        <Route path='/thanks' component={Thanks} />
-      </Route>
-
+      <Route path='/thanks' component={Thanks} />
       <Route path='/:token' component={Orders} />
     </Route>
   </Router>
