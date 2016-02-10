@@ -1,9 +1,13 @@
 import React from 'react'
 
+import Countdown from './Countdown'
+
 export default React.createClass({
   render () {
     return (
       <div className='expose'>
+        <Countdown />
+
         <div>
           <article>
             <img src='images/knightgrams/gram@2x.png' width='153' />

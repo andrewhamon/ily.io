@@ -1,4 +1,4 @@
-.expose > div
+.expose > div:not(.countdown)
   max-width: 1000px
   margin: 0 auto
   padding: 20px 0
@@ -26,3 +26,28 @@
   h3
     margin-top: 20px
     margin-bottom: 5px
+
+.countdown
+  max-width: 1000px
+  margin: 0 auto
+  padding: 30px 0 15px 0
+
+  +not-large()
+    font-size: 0.9em
+
+  .clock
+    display: flex
+    justify-content: center
+
+    > div
+      p:first-child
+        font-size: 2.8em
+        background: rgba(255, 255, 255, 0.3)
+        color: white
+        margin: 10px
+        border-radius: 5px
+        min-width: 80px
+
+        +not-large()
+          margin: 5px
+          min-width: 60px
