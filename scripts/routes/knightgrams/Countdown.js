@@ -5,12 +5,11 @@ var closingTime = moment('2016021104', 'YYYYMMDDHH')
 
 export default React.createClass({
   componentDidMount () {
-    this.tick()
+    setInterval(this.tick, 1000)
   },
 
   tick () {
     this.forceUpdate()
-    setTimeout(this.tick, 1000)
   },
 
   render () {
