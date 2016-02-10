@@ -113,7 +113,7 @@ export default React.createClass({
           {this.state.orders.map(order =>
             <div className='order' key={order.id}>
               <div className='details'>
-                <p className='producttitle'>{this.getProductTitles(order)}</p>
+                <p className='producttitle'><em>#{order.id}</em> {this.getProductTitles(order)}</p>
                 <p className='sentto'>Sent to: <em>{order.recipient_name}</em></p>
               </div>
               <p className={cx('status', order.status)}>{order.status}</p>
