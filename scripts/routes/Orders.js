@@ -68,7 +68,7 @@ export default React.createClass({
       return (
         <div>
           <h4>Pick up your KnightGram!</h4>
-          <p>Pickups begin <strong>today</strong>. They'll last from 12-3PM. Look for our picnic blanket in the free speech zone between MSB and the reflecting pond!</p>
+          <p>Pickups begin <strong>today</strong>. They'll last from 12-3PM. Look for our picnic blanket in the free speech zone between MSB and the Reflection Pond!</p>
 
           <a className='map-link' href="https://goo.gl/maps/MT5v4yH6kfD2" target="_blank">
             <img src="https://maps.googleapis.com/maps/api/staticmap?center=28.599579,-81.201315&zoom=18&scale=2&size=500x200&markers=28.599579,-81.201315&key=AIzaSyCjSVUpViTEwOKBVqKvzrSzPq6oMxTBWAc" />
