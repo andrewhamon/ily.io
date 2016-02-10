@@ -33,6 +33,8 @@ export default React.createClass({
   },
 
   toggleProduct (product) {
+    if (product.in_stock <= 0) return
+
     Analytics.recordIdempotentEvent('selectProduct')
 
     var selectedProducts
@@ -57,17 +59,29 @@ export default React.createClass({
     }
   },
 
+  getStockLabel (product) {
+    if (product.in_stock > 0) {
+      return `Only ${product.in_stock} left!`
+    } else {
+      return 'Out of stock'
+    }
+  },
+
   render () {
     return (
       <div className='product-selector'>
         {this.state.products.map(product => (
           <div key={product.id}
-            className={cx('product-item', { '-selected': this.isSelected(product) })}
+            className={cx('product-item', {
+              '-selected': this.isSelected(product),
+              '-disabled': product.in_stock <= 0
+            })}
             onClick={this.toggleProduct.bind(this, product)}>
 
             <aside>
               <h3 className='title'>{product.title}</h3>
               <p className='description'>{product.description}</p>
+              <p className='stock'>{this.getStockLabel(product)}</p>
             </aside>
 
             <aside>
