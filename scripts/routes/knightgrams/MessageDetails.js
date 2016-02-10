@@ -9,7 +9,8 @@ import Analytics from 'analytics'
 export default React.createClass({
   propTypes: {
     onChange: React.PropTypes.func.isRequired,
-    onUpgradesChange: React.PropTypes.func.isRequired
+    onUpgradesChange: React.PropTypes.func.isRequired,
+    closed: React.PropTypes.boolean
   },
 
   getInitialState () {
@@ -41,12 +42,12 @@ export default React.createClass({
     return (
       <form>
         <div className='form-group'>
-          <LengthLimitedTextarea placeholder='What would you like to say?' maxLength={140}
+          <LengthLimitedTextarea disabled={this.props.closed} placeholder='What would you like to say?' maxLength={140}
             onChange={this.handleChange} />
         </div>
 
         <div className='form-group'>
-          <label><input type='checkbox' onChange={this.onCheckChange} /> Write my letter in calligraphy (+<Money>{this.state.upgrade.price_in_cents}</Money>)</label>
+          <label><input disabled={this.props.closed} type='checkbox' onChange={this.onCheckChange} /> Write my letter in calligraphy (+<Money>{this.state.upgrade.price_in_cents}</Money>)</label>
         </div>
       </form>
     )

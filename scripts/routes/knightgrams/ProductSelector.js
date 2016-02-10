@@ -11,7 +11,8 @@ import Analytics from 'analytics'
 
 export default React.createClass({
   propTypes: {
-    onChange: React.PropTypes.func
+    onChange: React.PropTypes.func,
+    closed: React.PropTypes.bool
   },
 
   getInitialState () {
@@ -33,7 +34,7 @@ export default React.createClass({
   },
 
   toggleProduct (product) {
-    if (product.in_stock <= 0) return
+    if (product.in_stock <= 0 || this.props.closed) return
 
     Analytics.recordIdempotentEvent('selectProduct')
 
@@ -60,7 +61,9 @@ export default React.createClass({
   },
 
   getStockLabel (product) {
-    if (product.in_stock > 0) {
+    if (this.props.closed) {
+      return 'Closed for orders'
+    } else if (product.in_stock > 0) {
       return `Only ${product.in_stock} left!`
     } else {
       return 'Out of stock'
@@ -74,7 +77,7 @@ export default React.createClass({
           <div key={product.id}
             className={cx('product-item', {
               '-selected': this.isSelected(product),
-              '-disabled': product.in_stock <= 0
+              '-disabled': product.in_stock <= 0 || this.props.closed
             })}
             onClick={this.toggleProduct.bind(this, product)}>
 

@@ -3,6 +3,7 @@ import { History } from 'react-router'
 import debounce from 'lodash/debounce'
 import cx from 'classnames'
 import map from 'lodash/map'
+import moment from 'moment'
 
 import BaseService from 'services/BaseService'
 import OrderService from 'services/OrderService'
@@ -15,6 +16,9 @@ import Money from 'common/money'
 
 import Analytics from 'analytics'
 
+var closingTime = moment('2016021104', 'YYYYMMDDHH')
+// var closingTime = moment('20160210095745', 'YYYYMMDDHHmmss')
+
 export default React.createClass({
   mixins: [ History ],
 
@@ -24,7 +28,9 @@ export default React.createClass({
   },
 
   getInitialState () {
-    return {}
+    return {
+      closed: false
+    }
   },
 
   componentWillMount () {
@@ -49,6 +55,20 @@ export default React.createClass({
     this.updateSummary = debounce(this._updateSummary, 300)
   },
 
+  componentDidMount () {
+    this.tickInterval = setInterval(this._checkTimer, 1000)
+    this._checkTimer()
+  },
+
+  _checkTimer () {
+    var diff = closingTime.diff(moment())
+
+    if (diff < 0) {
+      clearInterval(this.tickInterval)
+      this.setState({ closed: true })
+    }
+  },
+
   _updateSummary () {
     OrderService.dryRun(this.state).then(
       order => this.setState({ order, valid: true }),
@@ -56,6 +76,7 @@ export default React.createClass({
   },
 
   _submit () {
+    if (this.state.closed) return
     Analytics.recordIdempotentEvent('submitOrder')
     this.stripeHandler.open({
       name: 'KnightGrams',
@@ -112,10 +133,16 @@ export default React.createClass({
           </p>
         </div>
       )
-    } else {
+    } else if (!this.state.closed) {
       return (
         <div className='site-section summary-section'>
           <p>Wait! We need some more info. Go double check what you entered.</p>
+        </div>
+      )
+    } else {
+      return (
+        <div className='site-section summary-section'>
+          <p>We're closed for orders. See you next year!</p>
         </div>
       )
     }
@@ -128,17 +155,18 @@ export default React.createClass({
           <img src='images/knightgrams-logo@2x.png' />
         </header>
 
-        <Expose />
+        <Expose time={closingTime} />
 
         <div className='site-section'>
           <h2>Choose your Valentine's gift</h2>
           <p>You can choose multiple</p>
-          <ProductSelector onChange={this.selectProducts} />
+          <ProductSelector closed={this.state.closed} onChange={this.selectProducts} />
         </div>
 
         <div className='site-section'>
           <h2>Tell us about them.</h2>
           <RecipientInformation
+            closed={this.state.closed}
             onNameChange={this.setOrderField.bind(this, 'recipient_name')}
             onPhoneChange={this.setOrderField.bind(this, 'recipient_phone_number')} />
         </div>
@@ -146,6 +174,7 @@ export default React.createClass({
         <div className='site-section'>
           <h2>Let's write them a letter.</h2>
           <MessageDetails
+            closed={this.state.closed}
             onChange={this.setOrderField.bind(this, 'message')}
             onUpgradesChange={this.setOrderField.bind(this, 'upgrade_ids')} />
         </div>

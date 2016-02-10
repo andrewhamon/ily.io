@@ -4,7 +4,8 @@ import Analytics from 'analytics'
 export default React.createClass({
   propTypes: {
     onNameChange: React.PropTypes.func.isRequired,
-    onPhoneChange: React.PropTypes.func.isRequired
+    onPhoneChange: React.PropTypes.func.isRequired,
+    closed: React.PropTypes.bool
   },
 
   setName (event) {
@@ -21,11 +22,13 @@ export default React.createClass({
     return (
       <form className='recipient-information'>
         <div className='form-group'>
-          <input type='text' onChange={this.setName} placeholder="Valentine's name (or nickname)" />
+          <input disabled={this.props.closed} onChange={this.setName}
+            type='text' placeholder="Valentine's name (or nickname)" />
         </div>
 
         <div className='form-group'>
-          <input type='tel' onChange={this.setPhone} placeholder="Valentine's mobile number" />
+          <input disabled={this.props.closed} onChange={this.setPhone}
+            type='tel' placeholder="Valentine's mobile number" />
         </div>
       </form>
     )

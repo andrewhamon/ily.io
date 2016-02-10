@@ -1,12 +1,17 @@
 import React from 'react'
+import moment from 'moment'
 
 import Countdown from './Countdown'
 
 export default React.createClass({
+  propTypes: {
+    time: React.PropTypes.instanceOf(moment).isRequired
+  },
+
   render () {
     return (
       <div className='expose'>
-        <Countdown />
+        <Countdown time={this.props.time} />
 
         <div>
           <article>
