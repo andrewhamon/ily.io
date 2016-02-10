@@ -4,6 +4,8 @@ import cx from 'classnames'
 import map from 'lodash/map'
 import { Link } from 'react-router'
 
+import find from 'lodash/find'
+
 import OrderService from 'services/OrderService'
 
 export default React.createClass({
@@ -61,6 +63,28 @@ export default React.createClass({
     }
   },
 
+  getPickupInfo () {
+    if (find(this.state.orders, order => order.status === 'ready')) {
+      return (
+        <div>
+          <h4>Pick up your KnightGram!</h4>
+          <p>Pickups begin <strong>today</strong>. They'll last from 12-3PM. Look for our picnic blanket in the free speech zone between MSB and the reflecting pond!</p>
+
+          <a className='map-link' href="https://goo.gl/maps/MT5v4yH6kfD2" target="_blank">
+            <img src="https://maps.googleapis.com/maps/api/staticmap?center=28.599579,-81.201315&zoom=18&scale=2&size=500x200&markers=28.599579,-81.201315&key=AIzaSyCjSVUpViTEwOKBVqKvzrSzPq6oMxTBWAc" />
+          </a>
+        </div>
+      )
+    } else {
+      return (
+        <p>
+          We're still working on your {this.state.orders.length == 1 ? 'KnightGram' : 'KnightGrams'}.
+          We'll send you a text when it's time to pick up.
+        </p>
+      )
+    }
+  },
+
   _getOrder () {
     OrderService.getRecipientOrder(this.props.params.token).then(orders =>
       this.setState({ orders }))
@@ -80,7 +104,7 @@ export default React.createClass({
           <p>Anyway, somebody must love you, because
           you've been sent {this.getPluralizedPhrase()}!</p>
 
-          <p>We'll text you soon with details about when and where to pickup your KnightGrams. You can also check this page for updates.</p>
+          {this.getPickupInfo()}
         </div>
 
         <div className='site-section order-list'>
