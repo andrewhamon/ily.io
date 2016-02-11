@@ -68,8 +68,7 @@ export default React.createClass({
       return (
         <div>
           <h4>Pick up your KnightGram!</h4>
-          <p>Pickups are taking place <strong>today (Thursday) from 10:45AM – 3PM</strong>. Look for our picnic blanket on the boardwalk leading from memory mall to the Student Union!</p>
-          <p>Can't make it? No worries! Check back later today for info on pickup times on Friday.</p>
+          <p>Pickups are done for today! Check back later tonight for information about pickups tomorrow.</p>
           <p><a href='mailto:knightgrams@ily.io'>Shoot us an email</a> if you have any questions.</p>
 
           <a className='map-link' href='https://goo.gl/maps/dGqjwcrYaZ92' target='_blank'>
