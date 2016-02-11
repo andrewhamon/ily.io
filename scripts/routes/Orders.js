@@ -68,19 +68,19 @@ export default React.createClass({
       return (
         <div>
           <h4>Pick up your KnightGram!</h4>
-          <p>Pickups begin <strong>today</strong>. They'll last from 12-3PM. Look for our picnic blanket on the boardwalk leading from memory mall to the Student Union!</p>
-          <p>Can't make it? No worries! Check back later today for info on pickup times tomorrow and Friday.</p>
+          <p>Pickups are taking place <strong>today (Thursday) from 10:30AM – 3PM</strong>. Look for our picnic blanket on the boardwalk leading from memory mall to the Student Union!</p>
+          <p>Can't make it? No worries! Check back later today for info on pickup times on Friday.</p>
           <p><a href='mailto:knightgrams@ily.io'>Shoot us an email</a> if you have any questions.</p>
 
-          <a className='map-link' href="https://goo.gl/maps/dGqjwcrYaZ92" target="_blank">
-            <img src="https://maps.googleapis.com/maps/api/staticmap?center=28.602865,-81.199738&zoom=17&scale=2&size=500x200&markers=28.602865,-81.199738&key=AIzaSyCjSVUpViTEwOKBVqKvzrSzPq6oMxTBWAc" />
+          <a className='map-link' href='https://goo.gl/maps/dGqjwcrYaZ92' target='_blank'>
+            <img src='https://maps.googleapis.com/maps/api/staticmap?center=28.602865,-81.199738&zoom=17&scale=2&size=500x200&markers=28.602865,-81.199738&key=AIzaSyCjSVUpViTEwOKBVqKvzrSzPq6oMxTBWAc' />
           </a>
         </div>
       )
     } else {
       return (
         <p>
-          We're still working on your {this.state.orders.length == 1 ? 'KnightGram' : 'KnightGrams'}.
+          We're still working on your {this.state.orders.length === 1 ? 'KnightGram' : 'KnightGrams'}.
           We'll send you a text when it's time to pick up.
         </p>
       )
