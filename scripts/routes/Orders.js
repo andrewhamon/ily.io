@@ -84,9 +84,9 @@ export default React.createClass({
       var email = <p><a href='mailto:knightgrams@ily.io'>Shoot us an email</a> if you have any questions.</p>
 
       if (isTomorrow) {
-        var description = <span>Pickups are taking place <strong>tomorrow</strong> {times} {email}</span>
+        var description = <span>Pickups are taking place <strong>tomorrow ({pickupStart.format('dddd')})</strong> {times} {email}</span>
       } else if (isAfterNow) {
-        description = <span>Pickups are taking place <strong>today</strong> {times} {email}</span>
+        description = <span>Pickups are taking place <strong>today ({pickupStart.format('dddd')})</strong> {times} {email}</span>
       } else if (isHappening) {
         description = <span>Pickups are taking place <strong>right now</strong> {times} {email}</span>
       } else {
