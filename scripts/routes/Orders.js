@@ -3,6 +3,7 @@ import sample from 'lodash/sample'
 import cx from 'classnames'
 import map from 'lodash/map'
 import { Link } from 'react-router'
+import moment from 'moment'
 
 import find from 'lodash/find'
 
@@ -65,11 +66,37 @@ export default React.createClass({
 
   getPickupInfo () {
     if (find(this.state.orders, order => order.status === 'ready')) {
+      var pickupStart = moment('2016-02-12T15:30:00')
+      var pickupEnd = moment('2016-02-12T18:30:00')
+
+      var isTomorrow = pickupStart.isSame(moment().add(1, 'day'), 'day')
+      var isAfterNow = pickupStart.isAfter(moment())
+      var isHappening = moment().isBetween(pickupStart, pickupEnd)
+
+      var times = (
+        <span>
+          from{' '}
+          <strong>{pickupStart.format('h:mma')} to {pickupEnd.format('h:mma')}</strong>
+          . Look for our picnic blanket on the boardwalk in between Memory Mall and the Student Union!
+        </span>
+      )
+
+      var email = <p><a href='mailto:knightgrams@ily.io'>Shoot us an email</a> if you have any questions.</p>
+
+      if (isTomorrow) {
+        var description = <span>Pickups are taking place <strong>tomorrow</strong> {times} {email}</span>
+      } else if (isAfterNow) {
+        description = <span>Pickups are taking place <strong>today</strong> {times} {email}</span>
+      } else if (isHappening) {
+        description = <span>Pickups are taking place <strong>right now</strong> {times} {email}</span>
+      } else {
+        description = <span>Oh no! You missed the pickup times for your KnightGrams. Please <a href='mailto:knightgrams@ily.io'>send us an email</a> and we'll do our best to accomodate you.</span>
+      }
+
       return (
         <div>
           <h4>Pick up your KnightGram!</h4>
-          <p>Pickups are done for today! Check back later tonight for information about pickups tomorrow.</p>
-          <p><a href='mailto:knightgrams@ily.io'>Shoot us an email</a> if you have any questions.</p>
+          <p>{description}</p>
 
           <a className='map-link' href='https://goo.gl/maps/dGqjwcrYaZ92' target='_blank'>
             <img src='https://maps.googleapis.com/maps/api/staticmap?center=28.602865,-81.199738&zoom=17&scale=2&size=500x200&markers=28.602865,-81.199738&key=AIzaSyCjSVUpViTEwOKBVqKvzrSzPq6oMxTBWAc' />
