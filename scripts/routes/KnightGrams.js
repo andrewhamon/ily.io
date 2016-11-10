@@ -16,8 +16,7 @@ import Money from 'common/money'
 
 import Analytics from 'analytics'
 
-var closingTime = moment('2016021104', 'YYYYMMDDHH')
-// var closingTime = moment('20160210095745', 'YYYYMMDDHHmmss')
+var closingTime = moment('2017021104', 'YYYYMMDDHH')
 
 export default React.createClass({
   mixins: [ History ],
